@@ -48,7 +48,8 @@ actually `3.5-32\0` (null-terminated), but `MAX_VERSION_SIZE`
 characters.
 
 I have reported this ([1][1] and [2][2]) on the AppVeyor discussion
-forums, though I'm not sure if this is the correct place.
+forums, though I'm not sure if this is the correct place. I also filed
+an [issue][9] on the GitHub issue tracker for AppVeyor.
 
 [1]: https://docs.python.org/3/using/windows.html#diagnostics
 [2]: https://docs.python.org/3/using/windows.html#installing-without-ui
@@ -58,3 +59,4 @@ forums, though I'm not sure if this is the correct place.
 [6]: https://github.com/python/cpython/blob/v3.4.4/PC/launcher.c#L142
 [7]: http://help.appveyor.com/discussions/problems/3626-python-windows-launcher-returns-code-103-when-specifying-35-32-bit
 [8]: http://help.appveyor.com/discussions/problems/3891-py-35-32-hellopy-fails-with-error-code-103
+[9]: https://github.com/appveyor/ci/issues/1870

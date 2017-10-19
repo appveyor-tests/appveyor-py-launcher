@@ -14,12 +14,29 @@ the [`Include_launcher=1`][2] argument to the `python-X.Y.Z.exe`
 installers.
 
 The `py.exe` launcher pre-installed on AppVeyor came from
-Python 3.4.4 (I saved the executable as an artifact and
-inspected it). From the help text:
+Python 3.4.4. I was able to export the executable as an [artifact][4] and
+use it with `PYLAUNCH_DEBUG` actually set. The reason it cannot find
+the versions of Python is in [`locate_pythons_for_key`][3]:
 
+```c
+status = RegEnumKeyW(core_root, i, ip->version, MAX_VERSION_SIZE);
+if (status != ERROR_SUCCESS) {
+    if (status != ERROR_NO_MORE_ITEMS) {
+        /* unexpected error */
+        winerror(status, message, MSGSIZE);
+        debug(L"Can't enumerate registry key for version %s: %s\n",
+              ip->version, message);
+    }
+    break;
+}
 ```
-Python Launcher for Windows Version 3.4.4150.1013
-```
+
+However, this code is essentially unchanged in the version of `py.exe`
+that [ships with 3.6.3][5], so the update may occur elsewhere (e.g.
+in `RegEnumKeyW`).
 
 [1]: https://docs.python.org/3/using/windows.html#diagnostics
 [2]: https://docs.python.org/3/using/windows.html#installing-without-ui
+[3]: https://github.com/python/cpython/blob/v3.4.4/PC/launcher.c#L215-L216
+[4]: https://ci.appveyor.com/project/jonparrott/nox/build/1.0.298.master/job/bf75a49xokfko86v/artifacts
+[5]: https://github.com/python/cpython/blob/v3.6.3/PC/launcher.c#L219-L226

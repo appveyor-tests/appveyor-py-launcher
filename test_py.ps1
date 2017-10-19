@@ -1,4 +1,4 @@
-#$ErrorActionPreference = "Stop"
+$ErrorActionPreference = "Stop"
 
 $result = (cmd /c info.py)
 $result

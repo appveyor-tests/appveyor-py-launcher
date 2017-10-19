@@ -25,6 +25,11 @@ environment:
 
 build: off
 
+install:
+  # NOTE: This is ignored by `py.exe`, but we set it any way (it's
+  #       not **supposed** to be ignored).
+  - SET PYLAUNCH_DEBUG=1
+
 test_script:
   - ps: |
       $PY_STR = $env:PY_STR

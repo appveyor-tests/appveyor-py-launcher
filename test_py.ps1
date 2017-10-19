@@ -21,5 +21,7 @@ $py_versions = @(
 
 foreach($py_version in $py_versions) {
     Write-Host "Launch py.exe for $py_version" -ForegroundColor Cyan
-    cmd /c py.exe -$py_version .\info.py
+    $result = (cmd /c py.exe -$py_version .\info.py)
+    $result
+    if ($result.length -eq 0) { throw "Empty result" }
 }

@@ -20,5 +20,6 @@ $py_versions = @(
 )
 
 foreach($py_version in $py_versions) {
-    py.exe -$py_version .\info.py
+    Write-Host "Launch py.exe for $py_version" -ForegroundColor Cyan
+    cmd /c py.exe -$py_version .\info.py
 }

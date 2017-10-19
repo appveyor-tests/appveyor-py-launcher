@@ -26,5 +26,7 @@ install:
   - SET PYLAUNCH_DEBUG=1
   - C:\Python36-x64\python.exe .\view_winreg.py
 
+build: off
+
 test_script:
   - py.exe -%PY_STR% -c "import sys; print(sys.version)"

@@ -9,6 +9,7 @@ environment:
     # Pre-installed Python versions.
     # See: http://www.appveyor.com/docs/installed-software#python
 
+    - PY_STR: "info"
     - PY_STR: "2.6"
     - PY_STR: "2.6-32"
     - PY_STR: "2.7"
@@ -22,11 +23,15 @@ environment:
     - PY_STR: "3.6"
     - PY_STR: "3.6-32"
 
-install:
-  - SET PYLAUNCH_DEBUG=1
-  - C:\Python36-x64\python.exe .\view_winreg.py
+install: off
 
 build: off
 
 test_script:
-  - py.exe -%PY_STR% -c "import sys; print(sys.version)"
+  - ps: |
+      $PY_STR = $env:PY_STR
+      If ($PY_STR -eq "info") {
+          C:\Python36-x64\python.exe .\view_winreg.py
+      } Else {
+          py.exe -$PY_STR -c "import sys; print(sys.version)"
+      }

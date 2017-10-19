@@ -31,12 +31,25 @@ if (status != ERROR_SUCCESS) {
 }
 ```
 
-However, this code is essentially unchanged in the version of `py.exe`
-that [ships with 3.6.3][5], so the update may occur elsewhere (e.g.
-in `RegEnumKeyW`).
+and the error indicates what is happening.
+
+```
+Can't enumerate registry key for version 3.5: More data is available.
+```
+
+This means that when trying to read the next key from `core_root`
+into `ip->version`, it fails with a `message` of `"More data is available."`.
+The fact that `ip->version` is `3.5` in the error message reflects the
+value **just before** reading in the next key failed.
+
+The `"More data is available."` failure occurs because the next key is
+actually `3.5-32\0` (null-terminated), but `MAX_VERSION_SIZE`
+[is `4`][6]. This is addressed [in 3.6.3][5] by allowing for to `8`
+characters.
 
 [1]: https://docs.python.org/3/using/windows.html#diagnostics
 [2]: https://docs.python.org/3/using/windows.html#installing-without-ui
 [3]: https://github.com/python/cpython/blob/v3.4.4/PC/launcher.c#L215-L216
 [4]: https://ci.appveyor.com/project/jonparrott/nox/build/1.0.298.master/job/bf75a49xokfko86v/artifacts
-[5]: https://github.com/python/cpython/blob/v3.6.3/PC/launcher.c#L219-L226
+[5]: https://github.com/python/cpython/blob/v3.6.3/PC/launcher.c#L166
+[6]: https://github.com/python/cpython/blob/v3.4.4/PC/launcher.c#L142

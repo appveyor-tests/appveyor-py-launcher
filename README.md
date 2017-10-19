@@ -13,5 +13,13 @@ I've tried a few things, like force re-installing `py.exe` via
 the [`Include_launcher=1`][2] argument to the `python-X.Y.Z.exe`
 installers.
 
+The `py.exe` launcher pre-installed on AppVeyor came from
+Python 3.4.4 (I saved the executable as an artifact and
+inspected it). From the help text:
+
+```
+Python Launcher for Windows Version 3.4.4150.1013
+```
+
 [1]: https://docs.python.org/3/using/windows.html#diagnostics
 [2]: https://docs.python.org/3/using/windows.html#installing-without-ui

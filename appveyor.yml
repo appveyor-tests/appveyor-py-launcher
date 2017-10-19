@@ -23,8 +23,6 @@ environment:
     - PY_STR: "3.6"
     - PY_STR: "3.6-32"
 
-install: off
-
 build: off
 
 test_script:
@@ -33,5 +31,5 @@ test_script:
       If ($PY_STR -eq "info") {
           C:\Python36-x64\python.exe .\view_winreg.py
       } Else {
-          py.exe -$PY_STR -c "import sys; print(sys.version)"
+          py.exe -$PY_STR .\info.py
       }

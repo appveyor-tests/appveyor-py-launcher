@@ -1,28 +1,5 @@
 version: 1.0.{build}.{branch}
 
-matrix:
-  fast_finish: false
-
-environment:
-  matrix:
-
-    # Pre-installed Python versions.
-    # See: http://www.appveyor.com/docs/installed-software#python
-
-    - PY_STR: "info"
-    - PY_STR: "2.6"
-    - PY_STR: "2.6-32"
-    - PY_STR: "2.7"
-    - PY_STR: "2.7-32"
-    - PY_STR: "3.3"
-    - PY_STR: "3.3-32"
-    - PY_STR: "3.4"
-    - PY_STR: "3.4-32"
-    - PY_STR: "3.5"
-    - PY_STR: "3.5-32"
-    - PY_STR: "3.6"
-    - PY_STR: "3.6-32"
-
 build: off
 
 install:
@@ -31,10 +8,4 @@ install:
   - SET PYLAUNCH_DEBUG=1
 
 test_script:
-  - ps: |
-      $PY_STR = $env:PY_STR
-      If ($PY_STR -eq "info") {
-          C:\Python36-x64\python.exe .\view_winreg.py
-      } Else {
-          py.exe -$PY_STR .\info.py
-      }
+- ps: .\test_py.ps1
